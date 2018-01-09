@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "~/miniconda3/envs/jupyterlab/bin/python",
+    "python.linting.pylintEnabled": false
+}
