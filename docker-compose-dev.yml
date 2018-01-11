@@ -15,7 +15,7 @@ services:
                   # postgres://user:password@netloc:port/dbname 
                   # http://docs.sqlalchemy.org/en/latest/core/engines.html#postgresql
                   - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
-                  - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_tes
+                  - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
             depends_on:
                   - users-db
             links:

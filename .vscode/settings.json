@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "~/miniconda3/envs/jupyterlab/bin/python",
+    "python.pythonPath": "/home/ian/Documents/web_development_tutorials/testdriven-app/users-service/env/bin/python",
     "python.linting.pylintEnabled": false
 }
