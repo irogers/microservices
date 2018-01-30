@@ -27,6 +27,13 @@ docker-compose -f docker-compose-dev.yml stop
 docker-compose -f docker-compose-dev.yml down
 ```
 
+## Check code coverage and quality
+
+```
+docker-compose -f docker-compose-dev.yml   run users-service python manage.py cov
+docker-compose -f docker-compose-dev.yml   run users-service flake8 project
+```
+
 ## Connect to Database
 
 ``` bash
