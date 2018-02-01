@@ -20,9 +20,9 @@ class TestDevelopmentConfig(TestCase):
         self.assertTrue(app.config['DEBUG'])
         self.assertFalse(current_app is None)
         self.assertTrue(
-            app.config['SQLALCHEMY_DATABASE_URI'] == 
+            app.config['SQLALCHEMY_DATABASE_URI'] ==
             os.environ.get('DATABASE_URL')
-        )
+            )
 
 
 class TestTestingConfig(TestCase):
@@ -54,4 +54,3 @@ class TestProductionConfig(TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

@@ -14,6 +14,7 @@ def ping_pong():
         'message': 'pong!'
     })
 
+
 @users_blueprint.route('/users', methods=['POST'])
 def add_user():
     post_data = request.get_json()
@@ -43,7 +44,8 @@ def add_user():
     except exc.IntegrityError as e:
         db.session.rollback()
         return jsonify(response_object), 400
-    
+
+
 @users_blueprint.route('/users/<user_id>', methods=['GET'])
 def get_single_user(user_id):
     """Get single user details"""

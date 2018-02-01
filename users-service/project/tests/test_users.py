@@ -5,11 +5,13 @@ from project.tests.base import BaseTestCase
 from project import db
 from project.api.models import User
 
+
 def add_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
     db.session.commit()
     return user
+
 
 class TestUserService(BaseTestCase):
     """Tests for the Users Service."""
@@ -51,13 +53,13 @@ class TestUserService(BaseTestCase):
             self.assertIn('Invalid payload', data['message'])
             self.assertIn('fail', data['status'])
 
-    def test_add_user_invalid_json_keys(self)    :
-        """Ensure error is thrown if the JSON object does not have a username 
+    def test_add_user_invalid_json_keys(self):
+        """Ensure error is thrown if the JSON object does not have a username
         key."""
         with self.client:
             response = self.client.post(
                 '/users',
-                data=json.dumps({'email':'michael@realpython.com'}),
+                data=json.dumps({'email': 'michael@realpython.com'}),
                 content_type='application/json'
             )
             data = json.loads(response.data.decode())
@@ -68,7 +70,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_duplicate_user(self):
         """Ensure error is thrown if the email already exists."""
         with self.client:
-            _ = self.client.post(
+            self.client.post(
                 '/users',
                 data=json.dumps({
                     'username': 'michael',
@@ -90,10 +92,9 @@ class TestUserService(BaseTestCase):
             )
             self.assertIn('fail', data['status'])
 
-
     def test_single_user(self):
         """Ensure get single user behaves correctly."""
-        user =  add_user('michael', 'michael@realpython.com')
+        user = add_user('michael', 'michael@realpython.com')
 
         with self.client:
             response = self.client.get(f'/users/{user.id}')
@@ -139,15 +140,13 @@ class TestUserService(BaseTestCase):
                 'fletcher@realpython.com', data['data']['users'][1]['email'])
             self.assertIn('success', data['status'])
 
-
     def test_main_no_users(self):
-        """Ensure the main route behaves correctly when no users have been added 
+        """Ensure the main route behaves correctly when no users have been added
         to the database."""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<h1>All Users</h1>', response.data)
         self.assertIn(b'<p>No users!</p>', response.data)
-
 
     def test_main_with_users(self):
         """Ensure the main route behaves correctly when users have been added to
@@ -161,5 +160,7 @@ class TestUserService(BaseTestCase):
             self.assertNotIn(b'<p>No users!</p>', response.data)
             self.assertIn(b'michael', response.data)
             self.assertIn(b'fletcher', response.data)
+
+
 if __name__ == '__main__':
     unittest.main()
